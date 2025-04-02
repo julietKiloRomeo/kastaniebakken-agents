@@ -1,0 +1,19 @@
+todo_task:
+  description: >
+    Gather info on any homework or things to bring to school as well as
+    any things Alvilde should bring for sports later in the day.
+
+    Make sure to ask both the schedule keeper and the parent intra reader!
+
+    Also - always pack these:
+     - lunch
+     - charged clock
+     - keys
+     - bicycle helmet
+
+  expected_output: >
+    A to-do list of everything Alvilde needs to pack, before leavning the house
+    on Monday morning including any homework in the weekly schedule.
+    
+    And write the list in danish!
+
