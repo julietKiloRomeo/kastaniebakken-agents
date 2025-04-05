@@ -1,0 +1,31 @@
+services:
+  chrome:
+    image: selenium/standalone-chrome:latest
+    container_name: selenium-chrome
+    ports:
+      - "4444:4444"
+    shm_size: 2g
+    restart: unless-stopped
+
+  backend:
+    build:
+      dockerfile: Dockerfile
+    ports:
+     - 8000:8000
+    depends_on:
+     - redis
+     - chrome
+    environment:
+     - SELENIUM_HOST=chrome
+     - SELENIUM_PORT=4444
+
+  frontend:
+    build:
+      dockerfile: web.Dockerfile
+    ports:
+      - 3000:80
+    depends_on:
+      - backend
+  redis:
+    image: redis
+

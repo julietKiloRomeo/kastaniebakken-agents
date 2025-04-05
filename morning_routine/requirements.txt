@@ -1,0 +1,6 @@
+reflex>=0.7.5
+crewai[tools]>=0.108.0,<1.0.0
+html2text>=2024.2.26
+python-dotenv>=1.1.0
+selenium>=4.30.0
+webdriver-manager>=4.0.2
