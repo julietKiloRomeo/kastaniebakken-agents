@@ -58,3 +58,8 @@ Let's create wonders together with the power and simplicity of crewAI.
 
 
 https://reflex.dev/blog/2024-10-8-self-hosting-reflex-with-docker/
+
+
+Error response from daemon: cannot stop container: 9f3086b588816f26fb9d607dd334c35dafb31a72a67f8581c985b78bab47048e: permission denied
+docker inspect --format '{{.State.Pid}}' 9f3
+sudo kill -9 235142
