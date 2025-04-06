@@ -2,11 +2,6 @@ from crewai.tools import BaseTool
 from typing import Type
 from pydantic import BaseModel, Field
 
-
-
-
-
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
