@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 import time
 import json
@@ -10,17 +9,17 @@ import os
 import dotenv
 dotenv.load_dotenv()
 
-def current_or_coming_week():
-    from datetime import date, timedelta
+from datetime import date, timedelta
 
-    today = date.today()
+def current_or_coming_week():
+
+    target_date = date.today()
 
     # Check if it's weekend (Saturday or Sunday)
-    if today.isoweekday() >= 6:  # Saturday=6, Sunday=7
-        # For weekend, add 7 days to get the coming week's date.
-        target_date = today + timedelta(days=7)
-    else:
-        target_date = today
+    is_weekend = target_date.isoweekday() >= 6   # Saturday=6, Sunday=7
+    look_at_next_week_instead = is_weekend
+    if look_at_next_week_instead:
+        target_date += timedelta(days=7)
 
     # Get ISO calendar week and year
     week_number = target_date.isocalendar()[1]
@@ -94,15 +93,14 @@ def format_schedule(schedule):
 def read_the_schedule():
     """schedule = read_the_schedule()
     """
-    # Initialize the Chrome driver with these options
-    # Configure Chrome options for headless mode
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Run Chrome in headless mode0
-    chrome_options.add_argument("--disable-gpu")  # Optional: disable GPU acceleration
-    chrome_options.add_argument("--window-size=1920,1080")  # Optional: set window size
 
-    driver = webdriver.Chrome(options=chrome_options)
-    
+    url = f"""http://{os.environ["SELENIUM_HOST"]}:{os.environ["SELENIUM_PORT"]}"""
+    driver = webdriver.Remote(
+        command_executor=url,
+        options = webdriver.ChromeOptions(),    
+    )
+
+
     week_and_year = current_or_coming_week()
     week = week_and_year["week"]
     year = week_and_year["year"]

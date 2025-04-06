@@ -78,7 +78,11 @@ def format_schedule(schedule):
 
 def read_the_schedule():
     # Initialize the Chrome driver with these options
-    driver = webdriver.Chrome(options=chrome_options)
+    url = f"""http://{os.environ["SELENIUM_HOST"]}:{os.environ["SELENIUM_PORT"]}"""
+    driver = webdriver.Remote(
+        command_executor=url,
+        options = webdriver.ChromeOptions(),    
+    )
     
     week_url = "https://birkerodprivatskole.m.skoleintra.dk/parent/3057/Alvildeitem/weeklyplansandhomework/item/class/{week}-{year}"
     
