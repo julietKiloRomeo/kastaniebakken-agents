@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from morning_routine.agents.tools.custom_tool import FITool
+from morning_routine.agents.tools.custom_tool import FITool, FileWriter
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -10,6 +10,8 @@ from morning_routine.agents.tools.custom_tool import FITool
 
 # Initialize the tool
 fi_tool = FITool()
+file_tool = FileWriter()
+
 
 @CrewBase
 class MorningRoutine():
@@ -23,19 +25,13 @@ class MorningRoutine():
 
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
-    @agent
-    def intra_scraper(self) -> Agent:
-        return Agent(
-            config=self.agents_config['intra_scraper'],
-            tools=[fi_tool],
-            verbose=True
-        )
 
     @agent
     def schedule_reader(self) -> Agent:
         return Agent(
             config=self.agents_config['schedule_reader'],
-            verbose=True
+            verbose=True,
+            tools=[file_tool],
         )
 
     # To learn more about structured task outputs,
@@ -59,7 +55,5 @@ class MorningRoutine():
             tasks=self.tasks, # Automatically created by the @task decorator
             verbose=True,
             manager_llm="gpt-4o",  # Specify which LLM the manager should use
-            process=Process.hierarchical,  
-            max_iterations=5,
-            planning=True, 
+            process=Process.sequential,
         )

@@ -1,19 +1,57 @@
 todo_task:
   description: >
+    Today is {weekday} in week {week} and it is morning.
+
+    We are packing Alvildes bag and bike, so help us with a checklist!
+
     Gather info on any homework or things to bring to school as well as
     any things Alvilde should bring for sports later in the day.
 
-    Make sure to ask both the schedule keeper and the parent intra reader!
-
     Also - always pack these:
-     - lunch
-     - charged clock
-     - keys
-     - bicycle helmet
+     - [ ] lunch
+     - [ ] charged clock
+     - [ ] keys
+     - [ ] bicycle helmet
 
   expected_output: >
     A to-do list of everything Alvilde needs to pack, before leavning the house
-    on Monday morning including any homework in the weekly schedule.
+    on {weekday} morning including any homework in the weekly schedule.
     
-    And write the list in danish!
+    And write the list in danish and as a markdown checklist (using ' - [ ] ....')!
 
+    Under the checklist - add the text for that day in the schedule (verbatim!)
+    E.g. under the to-do list for monday, add the original text for monday in the supplied schedule.
+    Make sure to put the original text in a markdown <details>
+
+    Some books might be called the same in different classes, so remember to make it clear
+    which class a book is for. For example: instead of grundbog, write grundbog i matematik (if for math class of course)
+    but if the schedule says to bring "The Bible" for religion, then that is of course specific enough :)
+
+    Do not add a title above the to-do list. Here is a good example:
+    ------ EXAMPLE START ------
+    - [ ] Madpakke
+    - [ ] Opladet ur
+    - [ ] Nøgler
+    - [ ] Cykelhjelm
+    - [ ] Mat. Opgavebog
+    - [ ] Dansk arbejdsbog
+
+    <details>
+    ### Fredag
+    ### Matematik
+    **Lektie** : Opgavebogen s. 38-40
+
+    Lektien bliver gennemgået og vi taler i klassen om forskellige divisionsmetoder. 😄
+
+    Vi går ud i skolegården, hvor vi skal lave et løb. Her skal eleverne indsamle information, som de skal bruge til at lave divisionsstykker med. 😄
+
+    ### Dansk
+    3. lektion: 
+
+    - Vi læser teksten "Tyrannosofaen " af Trond E. Haugan på s. 96 i **Fandango** og starter med opgaverne dertil i arbejdsbogen.'
+    </details>
+    ------ EXAMPLE END ------
+
+    Finally save the checklist as a markdown file named week-{week}-{weekday}.md
+
+  agent: schedule_reader

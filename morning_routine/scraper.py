@@ -118,7 +118,8 @@ def read_the_schedule():
             break
         except:
             time.sleep(0.2)
-    driver.close()
+
+#    driver.close()
             
     return format_schedule(schedule)
 
